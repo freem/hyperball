@@ -25,11 +25,15 @@ PROG_VOBJ = out-68k.vobj
 PROG_INTERMED = hyperball.p
 
 # [z80]
-Z80_LINKSCRIPT = $(DIR_SRCZ80)/linkscript.ld
+Z80_LINKSCRIPT = $(DIR_SRCZ80)/sounddrv.ld
 Z80_MAINFILE = $(DIR_SRCZ80)/sound.asm
 Z80_VOBJ = out-z80.vobj
 
 # [Sprites]
+
+# [ADPCM-A samples]
+
+# [ADPCM-B samples] (cart only)
 
 ################################################################################
 # output files #
@@ -50,6 +54,10 @@ Z80_OUTFILE = hyprball-m1.m1
 # [cdz80]
 CDZ80_OUTFILE = HYPRBALL.Z80
 
+# [pcm]
+
+# [cdpcm]
+
 ################################################################################
 # Neo-Geo CD disc image #
 #########################
@@ -63,12 +71,12 @@ NGCD_DISCLABEL = HYPRBALL
 # various flags #
 #################
 FLAGS_VASM68K = -m68000 -devpac -Fvobj -nosym
-
 FLAGS_VLINK68K = -brawbin1 -T $(PROG_LINKSCRIPT) -o $(PROG_INTERMED)
 FLAGS_VLINK68K_CD = -brawbin1 -T $(PROG_LINKSCRIPT) -o $(OUTPUTDIR_CD)/$(CDPROG_OUTFILE)
 
-FLAGS_VASMZ80 = -Fbin -nosym
-# todo: FLAGS_VLINKZ80
+FLAGS_VASMZ80 = -Fvobj -nosym
+FLAGS_VLINKZ80 = -brawbin1 -T $(Z80_LINKSCRIPT) -o $(OUTPUTDIR_CART)/$(Z80_OUTFILE)
+FLAGS_VLINKZ80_CD = -brawbin1 -T $(Z80_LINKSCRIPT) -o $(OUTPUTDIR_CD)/$(CDZ80_OUTFILE)
 
 FLAGS_CART = TARGET_CART
 FLAGS_CD = TARGET_CD
@@ -88,7 +96,7 @@ FLAGS_ROMWAK_Z80 = /p
 all: cart chd
 
 clean:
-	$(RM) $(PROG_INTERMED) $(PROG_VOBJ)
+	$(RM) $(PROG_INTERMED) $(PROG_VOBJ) $(Z80_VOBJ)
 	$(RM) $(OUTPUTDIR_CART)/$(PROG_OUTFILE) $(OUTPUTDIR_CART)/$(Z80_OUTFILE)
 	$(RM) $(OUTPUTDIR_CD)/$(CDPROG_OUTFILE) $(OUTPUTDIR_CD)/$(CDZ80_OUTFILE)
 
@@ -105,7 +113,8 @@ prog:
 	$(RM) $(PROG_INTERMED)
 
 z80:
-	$(VASM_Z80) $(FLAGS_VASMZ80) -D$(FLAGS_CART) -o $(OUTPUTDIR_CART)/$(Z80_OUTFILE) $(Z80_MAINFILE)
+	$(VASM_Z80) $(FLAGS_VASMZ80) -D$(FLAGS_CART) -o $(Z80_VOBJ) $(Z80_MAINFILE)
+	$(VLINK) $(FLAGS_VLINKZ80) $(Z80_VOBJ)
 	$(TOOL_ROMWAK) $(FLAGS_ROMWAK_Z80) $(OUTPUTDIR_CART)/$(Z80_OUTFILE) $(OUTPUTDIR_CART)/$(Z80_OUTFILE) 64 255
 
 ################################################################################
@@ -120,7 +129,8 @@ cdprog:
 	$(VLINK) $(FLAGS_VLINK68K_CD) $(PROG_VOBJ)
 
 cdz80:
-	$(VASM_Z80) $(FLAGS_VASMZ80) -D$(FLAGS_CD) -o $(OUTPUTDIR_CD)/$(CDZ80_OUTFILE) $(Z80_MAINFILE)
+	$(VASM_Z80) $(FLAGS_VASMZ80) -D$(FLAGS_CD) -o $(Z80_VOBJ) $(Z80_MAINFILE)
+	$(VLINK) $(FLAGS_VLINKZ80_CD) $(Z80_VOBJ)
 
 ################################################################################
 # CHD target
