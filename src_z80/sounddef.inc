@@ -11,14 +11,14 @@ SSG_Noise          equ 6   ; SSG Noise Channel Period
 SSG_Mixer          equ 7   ; SSG Enable Flags
 SSG_VolumeA        equ 8   ; SSG Channel A Volume and Mode
 SSG_VolumeB        equ 9   ; SSG Channel B Volume and Mode
-SSG_VolumeC        equ 0xA ; SSG Channel C Volume and Mode
-SSG_EnvFine        equ 0xB ; Envelope Period Fine Tune
-SSG_EnvCoarse      equ 0xC ; Envelope Period Coarse Tune
-SSG_EnvShape       equ 0xD ; Envelope Shape Cycle
+SSG_VolumeC        equ 0x0A ; SSG Channel C Volume and Mode
+SSG_EnvFine        equ 0x0B ; Envelope Period Fine Tune
+SSG_EnvCoarse      equ 0x0C ; Envelope Period Coarse Tune
+SSG_EnvShape       equ 0x0D ; Envelope Shape Cycle
 
 ;==============================================================================;
 ; [ADPCM-A address (port 6)]
-PCMA_Control       equ 0x00  ; ADPCM-A ON
+PCMA_Control       equ 0     ; ADPCM-A ON
 PCMA_MasterVol     equ 0x01  ; Total Level
 
 ; -- Per-Channel Variables, starting values (Channel 1) only -- ;
