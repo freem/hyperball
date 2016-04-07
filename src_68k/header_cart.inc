@@ -21,7 +21,7 @@
 	dc.l	softDips_USA	; Software dips for USA
 	dc.l	softDips_Europe	; Software dips for Europe
 
-	jmp		USER			; $122
+	jmp		Reset			; $122
 	jmp		PLAYER_START	; $128
 	jmp		DEMO_END		; $12E
 	jmp		COIN_SOUND		; $134

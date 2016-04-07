@@ -5,6 +5,8 @@
 	include "include/input.inc"    ; Input defines
 
 	include "ram_user.inc" ; user RAM
+
+	include "macro.asm" ; 
 ;==============================================================================;
 	include "header_68k.inc" ; 68000 header
 ;==============================================================================;
@@ -23,7 +25,7 @@
 ; (e.g. USER, PLAYER_START, DEMO_END, COIN_SOUND)
 
 ;==============================================================================;
-USER:
+Reset:
 	move.b d0,REG_DIPSW    ; kick watchdog
 	lea    BIOS_WORKRAM,sp ; set stack pointer to BIOS_WORKRAM
 	move.w #0,LSPC_MODE    ; Disable auto-animation, timer interrupts, set auto-anim speed to 0 frames
@@ -32,9 +34,11 @@ USER:
 	move.w #$2000,sr ; Enable VBlank interrupt, go Supervisor
 
 	; todo: handle user request
-.why:
-	move.b d0,REG_DIPSW ; kick watchdog
-	bra    .why
+Gameloop:
+	
+
+	jsr WaitVBlank
+	jmp Gameloop
 
 ;==============================================================================;
 ; PLAYER_START
@@ -68,22 +72,8 @@ COIN_SOUND:
 ; VBlank interrupt, run things we want to do every frame.
 
 VBlank:
-	; check if the BIOS wants to run its vblank
-	btst  #7,BIOS_SYSTEM_MODE
-	bne   .gamevbl
-	; run BIOS vblank
-	jmp   SYSTEM_INT1
 
-	;-----------------------;
-.gamevbl:
-	movem.l d0-d7/a0-a6,-(sp) ; save registers
-	move.w  #4,LSPC_IRQ_ACK   ; acknowledge the vblank interrupt
-	move.b  d0,REG_DIPSW      ; kick the watchdog
-
-.endvbl
-	jsr     SYSTEM_IO         ; "Call SYSTEM_IO every 1/60 second."
-	move.b  #0,flag_VBlank    ; clear vblank flag so waitVBlank knows to stop
-	movem.l (sp)+,d0-d7/a0-a6 ; restore registers
+	endVBlank
 	rte
 
 ;==============================================================================;
@@ -110,10 +100,11 @@ IRQ3:
 ; Waits for VBlank to finish (via a flag cleared at the end).
 
 WaitVBlank:
+
 	move.b #1,flag_VBlank
 
-.waitLoop
-	tst.b flag_VBlank
-	bne.s .waitLoop 
+	do
+		tst.b	flag_VBlank
+	while_ne
 
 	rts
