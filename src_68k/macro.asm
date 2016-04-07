@@ -110,7 +110,7 @@ endVBlank	macro
 
 
 	jsr     SYSTEM_IO         ; "Call SYSTEM_IO every 1/60 second."
-	clr.b  #0,flag_VBlank    ; clear vblank flag so waitVBlank knows to stop
+	clr.b  flag_VBlank    ; clear vblank flag so waitVBlank knows to stop
 	movem.l (sp)+,d0-d7/a0-a6 ; restore registers	
     
 endm
