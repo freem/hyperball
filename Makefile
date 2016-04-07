@@ -81,11 +81,11 @@ NGCD_DISCLABEL = HYPRBALL
 ################################################################################
 # various flags #
 #################
-FLAGS_VASM68K = -m68000 -devpac -Fvobj -nosym
+FLAGS_VASM68K = -m68000 -devpac -Fvobj -nosym -I$(DIR_SRC68K)
 FLAGS_VLINK68K = -brawbin1 -T $(PROG_LINKSCRIPT) -o $(PROG_INTERMED)
 FLAGS_VLINK68K_CD = -brawbin1 -T $(PROG_LINKSCRIPT) -o $(OUTPUTDIR_CD)/$(CDPROG_OUTFILE)
 
-FLAGS_VASMZ80 = -Fvobj -nosym
+FLAGS_VASMZ80 = -Fvobj -nosym -I$(DIR_SRCZ80)
 FLAGS_VLINKZ80 = -brawbin1 -T $(Z80_LINKSCRIPT) -o $(OUTPUTDIR_CART)/$(Z80_OUTFILE)
 FLAGS_VLINKZ80_CD = -brawbin1 -T $(Z80_LINKSCRIPT) -o $(OUTPUTDIR_CD)/$(CDZ80_OUTFILE)
 
