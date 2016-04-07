@@ -17,6 +17,8 @@ TOOL_NEOGEOCONVERT = neogeoconvert
 
 DIR_SRC68K = src_68k
 DIR_SRCZ80 = src_z80
+DIR_ADPCMA = pcm/pcma
+DIR_ADPCMB = pcm/pcmb
 
 # [prog]
 PROG_LINKSCRIPT = $(DIR_SRC68K)/linkscript.ld
@@ -90,7 +92,7 @@ FLAGS_ROMWAK_PROG2 = /p $(OUTPUTDIR_CART)/$(PROG_OUTFILE) $(OUTPUTDIR_CART)/$(PR
 FLAGS_ROMWAK_Z80 = /p
 
 ################################################################################
-.phony: all clean cart cd chd prog z80 cdprog cdz80
+.phony: all clean cart cd chd prog z80 pcm cdprog cdz80 cdpcm
 
 ################################################################################
 all: cart chd
@@ -117,6 +119,9 @@ z80:
 	$(VLINK) $(FLAGS_VLINKZ80) $(Z80_VOBJ)
 	$(TOOL_ROMWAK) $(FLAGS_ROMWAK_Z80) $(OUTPUTDIR_CART)/$(Z80_OUTFILE) $(OUTPUTDIR_CART)/$(Z80_OUTFILE) 64 255
 
+pcm:
+	@echo "adpcm step not done yet"
+
 ################################################################################
 # CD target
 # todo: implement linker script and vlink
@@ -131,6 +136,9 @@ cdprog:
 cdz80:
 	$(VASM_Z80) $(FLAGS_VASMZ80) -D$(FLAGS_CD) -o $(Z80_VOBJ) $(Z80_MAINFILE)
 	$(VLINK) $(FLAGS_VLINKZ80_CD) $(Z80_VOBJ)
+
+cdpcm:
+	@echo "CD adpcm step not done yet"
 
 ################################################################################
 # CHD target
