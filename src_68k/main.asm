@@ -41,7 +41,7 @@ Reset:
 	move.w #0,LSPC_MODE    ; Disable auto-animation, timer interrupts, set auto-anim speed to 0 frames
 	move.w #7,LSPC_IRQ_ACK ; ack. all IRQs
 	
-	move.w  #$8fff,$401FFE
+	move.w  #$8fff,PALETTE_BACKDROP
 
 	move.w #$2000,sr ; Enable VBlank interrupt, go Supervisor
 
