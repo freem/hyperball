@@ -1,2 +1,2 @@
-# hyperball
-code name HYPER BALL. yes.
+# code name HYPER BALL
+yes.
