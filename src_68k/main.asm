@@ -1,4 +1,5 @@
 ; code name HYPER BALL | 68K code
+
 ;==============================================================================;
 	include "include/neogeo.inc"   ; Neo-Geo Hardware and System ROM definitions
 	include "include/ram_bios.inc" ; BIOS RAM locations
@@ -10,7 +11,16 @@
 ;==============================================================================;
 	include "header_68k.inc" ; 68000 header
 ;==============================================================================;
-	section code
+
+	ifd ENABLE_SECTION
+		
+	else
+		section code
+	endif
+	
+	
+	
+	
 
 	ifd TARGET_CD
 		include "header_cd.inc"
@@ -30,6 +40,8 @@ Reset:
 	lea    BIOS_WORKRAM,sp ; set stack pointer to BIOS_WORKRAM
 	move.w #0,LSPC_MODE    ; Disable auto-animation, timer interrupts, set auto-anim speed to 0 frames
 	move.w #7,LSPC_IRQ_ACK ; ack. all IRQs
+	
+	move.w  #$8fff,$401FFE
 
 	move.w #$2000,sr ; Enable VBlank interrupt, go Supervisor
 
