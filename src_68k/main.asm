@@ -41,6 +41,9 @@ Reset:
 	move.w #0,LSPC_MODE    ; Disable auto-animation, timer interrupts, set auto-anim speed to 0 frames
 	move.w #7,LSPC_IRQ_ACK ; ack. all IRQs
 	
+	
+	jsr clear_fix
+	
 	move.w  #$8fff,PALETTE_BACKDROP
 
 	move.w #$2000,sr ; Enable VBlank interrupt, go Supervisor
@@ -52,6 +55,16 @@ Gameloop:
 	jsr WaitVBlank
 	jmp Gameloop
 
+clear_fix:
+	
+	move.w  #FIXMAP,LSPC_ADDR
+    move.l  #$4F0,d0
+	do
+		move.w  #$00FF,LSPC_DATA
+    while_dbra d0
+
+	rts
+	
 	include "mvs.asm"
 	include "VBlank.asm" ; VBlank and IRQ code
 	
