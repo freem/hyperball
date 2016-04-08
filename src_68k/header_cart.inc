@@ -1,6 +1,6 @@
 ; Neo-Geo Cart Header
 ;==============================================================================;
-	
+
 	dc.b	"NEO-GEO"
 	dc.b	$00				; System Version (0=cart; 1/2 are used for CD games)
 
@@ -12,8 +12,6 @@
 							; etc.
 	dc.l	$00108000		; pointer to backup RAM block (first two bytes are debug dips)
 	dc.w	$0000			; game save size in bytes
-	
-	
 
 	dc.b	$02				; Eye catcher anim flag (0=BIOS,1=game,2=nothing)
 	dc.b	$00				; Sprite bank for eyecatch if done by BIOS
@@ -27,7 +25,6 @@
 	jmp		DEMO_END		; $12E
 	jmp		COIN_SOUND		; $134
 
-	
 	dc.l	$FFFFFFFF,$FFFFFFFF,$FFFFFFFF,$FFFFFFFF
 	dc.l	$FFFFFFFF,$FFFFFFFF,$FFFFFFFF,$FFFFFFFF
 	dc.l	$FFFFFFFF,$FFFFFFFF,$FFFFFFFF,$FFFFFFFF
