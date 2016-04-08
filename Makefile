@@ -34,6 +34,8 @@ Z80_MAINFILE = $(DIR_SRCZ80)/sound.asm
 Z80_VOBJ = out-z80.vobj
 
 # [Sprites]
+SPRITES_C1 = hyprball-c1.c1
+SPRITES_C2 = hyprball-c2.c2
 
 # [Fix tiles]
 FIX_SOURCE = $(DIR_GRAPHICS)/hyprball-s1.s1
@@ -116,6 +118,8 @@ clean:
 ################################################################################
 cart: prog z80
 	cp $(FIX_SOURCE) $(OUTPUTDIR_CART)/$(FIX_OUTFILE)
+	cp $(DIR_GRAPHICS)/$(SPRITES_C1) $(OUTPUTDIR_CART)/$(SPRITES_C1)
+	cp $(DIR_GRAPHICS)/$(SPRITES_C2) $(OUTPUTDIR_CART)/$(SPRITES_C2)
 
 prog:
 	$(VASM_68K) $(FLAGS_VASM68K) -D$(FLAGS_CART) -o $(PROG_VOBJ) $(PROG_MAINFILE)
@@ -137,7 +141,7 @@ pcm:
 # todo: implement linker script and vlink
 ################################################################################
 cd: cdprog cdz80
-	cp $(FIX_SOURCE)  $(OUTPUTDIR_CD)/$(CDFIX_OUTFILE)
+	cp $(FIX_SOURCE) $(OUTPUTDIR_CD)/$(CDFIX_OUTFILE)
 	@echo "CD image generation still needs work."
 
 cdprog:
