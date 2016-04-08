@@ -8,14 +8,18 @@ Sprite_init macro ;VRAM ADRESS ,n' x,n'y,adress struct
     
 	
 	; Make
-	if \2-1 != 0
 	
-		move.w  #\2-1,d2
+	
+	move.w  #\2-1,d2
+	cmp.w #0,d2
+	if_mi		
 		do
 			move.w  #$40,LSPC_DATA
 		while_dbra d2
+	endi
+		
 	
-	endif
+	
 	
 	
 	;init x
@@ -48,14 +52,15 @@ Sprite_init_ext macro ;VRAM ADRESS ,n' x
     
 	
 	; Make
-	if \2-1 != 0
 	
-		move.w  #\2-1,d2
+	
+	move.w  #\2-1,d2
+	cmp.w #0,d2
+	if_mi		
 		do
 			move.w  #$40,LSPC_DATA
 		while_dbra d2
-	
-	endif
+	endi
 	
 	
 	;init x
