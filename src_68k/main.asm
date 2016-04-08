@@ -66,30 +66,34 @@ clear_fix:
 	while_dbra d0
 
 	rts
-	
+
+;==============================================================================;
+; Joypad
+; Joypad control routine
+
 Joypad:
 	
 	;J1
-	joypad_event $10,$00,REG_P1CNT
-	joypad_event $20,$01,REG_P1CNT
-	joypad_event $40,$02,REG_P1CNT
-	joypad_event $80,$03,REG_P1CNT
-	
-	joypad_event $01,$04,REG_P1CNT
-	joypad_event $02,$05,REG_P1CNT
-	joypad_event $04,$06,REG_P1CNT
-	joypad_event $08,$07,REG_P1CNT
-	
+	joypad_event INPUT_A,$00,REG_P1CNT
+	joypad_event INPUT_B,$01,REG_P1CNT
+	joypad_event INPUT_C,$02,REG_P1CNT
+	joypad_event INPUT_D,$03,REG_P1CNT
+
+	joypad_event INPUT_UP,$04,REG_P1CNT
+	joypad_event INPUT_DOWN,$05,REG_P1CNT
+	joypad_event INPUT_LEFT,$06,REG_P1CNT
+	joypad_event INPUT_RIGHT,$07,REG_P1CNT
+
 	;J2
-	joypad_event $10,$10,REG_P2CNT
-	joypad_event $20,$11,REG_P2CNT
-	joypad_event $40,$12,REG_P2CNT
-	joypad_event $80,$13,REG_P2CNT
+	joypad_event INPUT_A,$10,REG_P2CNT
+	joypad_event INPUT_B,$11,REG_P2CNT
+	joypad_event INPUT_C,$12,REG_P2CNT
+	joypad_event INPUT_D,$13,REG_P2CNT
 	
-	joypad_event $01,$14,REG_P2CNT
-	joypad_event $02,$15,REG_P2CNT
-	joypad_event $04,$16,REG_P2CNT
-	joypad_event $08,$17,REG_P2CNT
+	joypad_event INPUT_UP,$14,REG_P2CNT
+	joypad_event INPUT_DOWN,$15,REG_P2CNT
+	joypad_event INPUT_LEFT,$16,REG_P2CNT
+	joypad_event INPUT_RIGHT,$17,REG_P2CNT
 
 
 
