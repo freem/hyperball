@@ -127,7 +127,6 @@ endm
 
 Init_NeoGeo	macro	
 
-	;lea    $10F300,sp
 	move.b #0,REG_DIPSW    ; kick watchdog
 	lea    BIOS_WORKRAM,sp ; set stack pointer to BIOS_WORKRAM
 	move.w #0,LSPC_MODE    ; Disable auto-animation, timer interrupts, set auto-anim speed to 0 frames

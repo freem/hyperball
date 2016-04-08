@@ -45,6 +45,9 @@ Sprite_init macro ;VRAM ADRESS ,n' x,n'y,adress struct
     
 endm
 
+
+
+
 Sprite_init_ext macro ;VRAM ADRESS ,n' x
 		
 	;Init Y + info
@@ -135,14 +138,33 @@ Sprite_Position_init macro ;...;x,y
 	
 endm
 
+Sprite_init_sp macro ;...;x,y
+    
+    move.w  #SCB4+(\1),LSPC_ADDR
+    move.w  #$0400+(\2<<7),LSPC_DATA
+    
+    
+    
+    move.w  #SCB3+(\1),LSPC_ADDR
+    move.w  #1+($1F0-\3)<<7,LSPC_DATA
+	
+endm
 
 
+Sprite_Draw_sp macro ;struct,tile
+	
+
+	move.w  #SCB1+(\1*64),LSPC_ADDR
+	move.w  \2,LSPC_DATA
+	move.w  \3,LSPC_DATA 
+
+
+endm
 
 Sprite_Draw macro ;struct,address sprite
 	move.w  \1+_scb1,d0 
 	lea     \2,a0
 	
-	clr.l d4
 	move.w 	\1+_h,d4
 	sub.b	#1,d4
 	

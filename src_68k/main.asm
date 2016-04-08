@@ -36,6 +36,10 @@ BG2_id  = 33
 BG2_w   = 32
 BG2_h   = 32
 
+SCORE_id  = 65
+SCORE_w   = 02
+SCORE_h   = 02
+
 ;==============================================================================;
 ; todo: actual versions of the standard routines required by the bios
 ; (e.g. USER, PLAYER_START, DEMO_END, COIN_SOUND)
@@ -57,6 +61,8 @@ Reset:
 	
 	Load_Palette palette_tile1,$10,2
 	
+	Load_Palette palette_scoreboard,$30,1
+	
 	
 	
 	;Background
@@ -64,6 +70,10 @@ Reset:
 	Sprite_position_ram_init 	BG1_struct,0,0
 	
 	Sprite_DrawBG 				BG1_struct,BG1_h,Map1
+	
+	;Score
+	Sprite_Draw_sp SCORE_id,#$0407,#$3000
+	Sprite_init_sp SCORE_id,$40,$40
 
 	move.w #$2000,sr ; Enable VBlank interrupt, go Supervisor
 
@@ -143,7 +153,8 @@ palette_tile1:
 palette_tile2:
     dc.w $5f0f,$2930,$0333,$0310,$7fff,$0ccc,$0888,$0555,$5246,$5479,$769c,$7fca,$0830,$2f96,$0620,$0000
 
-
+palette_scoreboard:
+    dc.w $5f0f,$0333,$0555,$0888,$2f96,$7fca,$0ccc,$7fff,$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 
 
 
