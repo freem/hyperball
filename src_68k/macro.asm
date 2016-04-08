@@ -82,7 +82,7 @@ while_dbra	macro
 	dbra.w \1,L1\@@
 endm
 
-
+	include "MC_Sprite.asm"
 _A	= 0
 _B 	= 1
 _C 	= 2
@@ -202,3 +202,6 @@ Clear_Ram macro ; structure
 	while_dbra d7
 	
 endm
+
+	
+	

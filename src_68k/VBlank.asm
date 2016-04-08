@@ -4,7 +4,9 @@
 ; VBlank interrupt, run things we want to do every frame.
 
 VBlank:
-
+	move.w #1,LSPC_INCR 	
+	
+	Sprite_position_ram BG1_struct
 
 
 	jsr Joypad

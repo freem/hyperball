@@ -25,6 +25,16 @@
 	endif
 
 	include "softdips.inc"
+	
+	
+;ID & Info
+BG1_id  = 1
+BG1_w   = 32
+BG1_h   = 32
+
+BG2_id  = 33
+BG2_w   = 32
+BG2_h   = 32
 
 ;==============================================================================;
 ; todo: actual versions of the standard routines required by the bios
@@ -43,7 +53,17 @@ Reset:
 
 	;Load Palettes
 	Load_Palette pal_DefaultFix,$00,1
-	Load_Palette pal_TestCourt,$10,1
+	Load_Palette pal_TestCourt,$01,1
+	
+	Load_Palette palette_tile1,$10,2
+	
+	
+	
+	;Background
+	Sprite_init					BG1_id,BG1_w,BG1_h,BG1_struct
+	Sprite_position_ram_init 	BG1_struct,0,0
+	
+	Sprite_DrawBG 				BG1_struct,BG1_h,Map1
 
 	move.w #$2000,sr ; Enable VBlank interrupt, go Supervisor
 
@@ -101,11 +121,19 @@ Joypad:
 
 	
 Hello_text:
-	dc.b "Hello",0
+	dc.b "Hellod 2",0
 	
 palette_ng:
     dc.w $0f0f,$0eee,$0ddd,$0ccc,$0bbb,$0aaa,$0999,$0888,$010f,$0f00,$00ff,$0f0f,$0f0f,$0f0f,$0f0f,$0000
 	
+palette_tile1:
+    dc.w $5f0f,$2930,$0333,$0310,$7fff,$0ccc,$0888,$0555,$5246,$5479,$769c,$0620,$0830,$2f96,$7fca,$0000
+    
+palette_tile2:
+    dc.w $5f0f,$2930,$0333,$0310,$7fff,$0ccc,$0888,$0555,$5246,$5479,$769c,$7fca,$0830,$2f96,$0620,$0000
+
+
+
 
 
 ;==============================================================================;
@@ -116,3 +144,7 @@ palette_ng:
 
 ;==============================================================================;
 	include "paldata.inc" ; game palette data
+	
+	
+Map1:
+	include "Map/map1.sng"
