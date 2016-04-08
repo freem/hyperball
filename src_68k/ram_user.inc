@@ -26,6 +26,7 @@ BG2_struct 		= RAMSTART+$60
 flag_VBlank: ds.b 1 ; (byte) vblank flag
 flag_HBlank: ds.b 1 ; (byte) hblank flag
 _else_     : ds.b 1 ; (byte) temp var for else macro
+ram0004:     ds.b 1 ; (byte) currently unused; here for alignment
 
 MEM_STDCTRL: ds.b $20 ; (32 byte) joypad 1&2 (1 down , 2 down stop, 3 up)
 
