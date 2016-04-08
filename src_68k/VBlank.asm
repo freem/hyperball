@@ -5,6 +5,10 @@
 
 VBlank:
 
+
+
+	jsr Joypad
+	
 	endVBlank
 	rte
 
