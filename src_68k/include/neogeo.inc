@@ -244,6 +244,7 @@ REG_UPBANK_PCM		equ $FF01A3		; (byte) Upload zone 512KB PCM DRAM bank selection
 ;==============================================================================;
 ; VRAM address aliases
 SCB1				equ $0000		; VRAM, Sprite tilemaps
+FIXMAP         		equ $7000   	; VRAM, Fix map
 SCB2				equ $8000		; VRAM, Sprite shrink ratios
 SCB3				equ $8200		; VRAM, Sprite Y positions and sizes
 SCB4				equ $8400		; VRAM, Sprite X positions
