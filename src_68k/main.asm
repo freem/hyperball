@@ -40,13 +40,10 @@ Reset:
 	Text_Draw 2,3,Hello_text
 	
 	
-=======
-	move.b d0,REG_DIPSW    ; kick watchdog
-	lea    BIOS_WORKRAM,sp ; set stack pointer to BIOS_WORKRAM
-	move.w #0,LSPC_MODE    ; Disable auto-animation, timer interrupts, set auto-anim speed to 0 frames
-	move.w #7,LSPC_IRQ_ACK ; ack. all IRQs
 
-	jsr clear_fix
+	
+
+	
 
 
 	move.w  #$8fff,PALETTE_BACKDROP
@@ -114,7 +111,7 @@ Hello_text:
 palette_ng:
     dc.w $0f0f,$0eee,$0ddd,$0ccc,$0bbb,$0aaa,$0999,$0888,$010f,$0f00,$00ff,$0f0f,$0f0f,$0f0f,$0f0f,$0000
 	
-=======
+
 
 ;==============================================================================;
 
@@ -123,4 +120,4 @@ palette_ng:
 	include "palette.asm" ; palette related code
 
 ;==============================================================================;
-	include "paldata.inc" ; game palette data
+	;include "paldata.inc" ; game palette data
