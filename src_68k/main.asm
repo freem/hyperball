@@ -70,6 +70,17 @@ Reset:
 	; todo: handle user request
 Gameloop:
 
+
+	cmpi.b 	#$02,MEM_STDCTRL+_RIGHT
+	if_ne
+		addi.w #$0080,BG1_struct+_x	
+	endi
+	
+	cmpi.b 	#$02,MEM_STDCTRL+_LEFT
+	if_ne
+		subi.w #$0080,BG1_struct+_x	
+	endi
+
 	jsr WaitVBlank
 	jmp Gameloop
 
@@ -80,7 +91,7 @@ Gameloop:
 clear_fix:
 
 	move.w  #FIXMAP,LSPC_ADDR
-	move.l  #$4F0,d0
+	move.l  #$500,d0
 	do
 		move.w  #$00FF,LSPC_DATA
 	while_dbra d0
@@ -148,3 +159,5 @@ palette_tile2:
 	
 Map1:
 	include "Map/map1.sng"
+
+	org $80000

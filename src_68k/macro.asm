@@ -106,7 +106,7 @@ endVBlank	macro
 
 	movem.l d0-d7/a0-a6,-(sp) ; save registers
 	move.w  #4,LSPC_IRQ_ACK   ; acknowledge the vblank interrupt
-	move.b  d0,REG_DIPSW      ; kick the watchdog
+	move.b  #0,REG_DIPSW      ; kick the watchdog
 
 
 	jsr     SYSTEM_IO         ; "Call SYSTEM_IO every 1/60 second."
@@ -127,10 +127,14 @@ endm
 
 Init_NeoGeo	macro	
 
-	move.b d0,REG_DIPSW    ; kick watchdog
+	;lea    $10F300,sp
+	move.b #0,REG_DIPSW    ; kick watchdog
 	lea    BIOS_WORKRAM,sp ; set stack pointer to BIOS_WORKRAM
 	move.w #0,LSPC_MODE    ; Disable auto-animation, timer interrupts, set auto-anim speed to 0 frames
 	move.w #7,LSPC_IRQ_ACK ; ack. all IRQs
+
+
+   
 	
 	move.w #1,LSPC_INCR 
 	
