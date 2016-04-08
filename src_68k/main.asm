@@ -121,7 +121,7 @@ Joypad:
 
 	
 Hello_text:
-	dc.b "Hellod 2",0
+	dc.b "Hellod 2",0,0
 	
 palette_ng:
     dc.w $0f0f,$0eee,$0ddd,$0ccc,$0bbb,$0aaa,$0999,$0888,$010f,$0f00,$00ff,$0f0f,$0f0f,$0f0f,$0f0f,$0000
