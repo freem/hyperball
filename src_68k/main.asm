@@ -38,21 +38,12 @@ Reset:
 	
 	jsr clear_fix
 	Text_Draw 2,3,Hello_text
-	
-	
-
-	
-
-	
-
 
 	move.w  #$8fff,PALETTE_BACKDROP
-	
-	
+
 	;Load Palettes
-	Load_Palette palette_ng,$00,1
-	
-	
+	Load_Palette pal_DefaultFix,$00,1
+	Load_Palette pal_TestCourt,$00,2
 
 	move.w #$2000,sr ; Enable VBlank interrupt, go Supervisor
 
@@ -120,4 +111,4 @@ palette_ng:
 	include "palette.asm" ; palette related code
 
 ;==============================================================================;
-	;include "paldata.inc" ; game palette data
+	include "paldata.inc" ; game palette data
