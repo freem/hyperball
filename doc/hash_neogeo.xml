@@ -1,0 +1,29 @@
+	<!-- add this to mame/hash/neogeo.xml at the bottom just before </softwarelist> -->
+	<!-- you will need to change hashes every time a file changes, but that's development life. -->
+	<software name="hyperball">
+		<description>Hyper Ball</description>
+		<year>2016</year>
+		<publisher>freem and Kannagi</publisher>
+		<sharedfeat name="release" value="MVS,AES" />
+		<sharedfeat name="compatibility" value="MVS,AES" />
+		<part name="cart" interface="neo_cart">
+			<dataarea name="maincpu" width="16" endianness="big" size="0x100000">
+				<rom loadflag="load16_word_swap" name="hyprball-p1.p1" offset="0x000000" size="0x080000" crc="5b7b859a" sha1="58647d2ded7043113ede239baae4d18cdf927b71" />
+			</dataarea>
+			<dataarea name="fixed" size="0x040000">
+				<rom offset="0x000000" size="0x020000" name="hyprball-s1.s1" crc="80432754" sha1="769ba5dc5cef9228a94b08e238425a020869d22e" />
+			</dataarea>
+			<dataarea name="audiocpu" size="0x020000">
+				<rom offset="0x000000" size="0x010000" name="hyprball-m1.m1" crc="3da50563" sha1="66d25f0ec2c06ee44e3ba3fb75cd52a44ff2b710" />
+			</dataarea>
+			<!--
+			<dataarea name="ymsnd" size="0x80000">
+				<rom name="hyprball-v1.v1" offset="0x000000" size="0x080000" crc="debeb8fb" sha1="49a3d3578c087f1a0050168571ef8d1b08c5dc05" />
+			</dataarea>
+			-->
+			<dataarea name="sprites" size="0x200000">
+				<rom loadflag="load16_byte" name="hyprball-c1.c1" offset="0x000000" size="0x100000" crc="072ce599" sha1="652bfd5ccc47e8ae9ba073e098fd328f2b539c87" />
+				<rom loadflag="load16_byte" name="hyprball-c2.c2" offset="0x000001" size="0x100000" crc="d0a8de07" sha1="07fb9c0036fb7f4bcbd8fbc24f5d143facbc3fce" />
+			</dataarea>
+		</part>
+	</software>
