@@ -43,7 +43,7 @@ Reset:
 
 	;Load Palettes
 	Load_Palette pal_DefaultFix,$00,1
-	Load_Palette pal_TestCourt,$00,2
+	Load_Palette pal_TestCourt,$10,1
 
 	move.w #$2000,sr ; Enable VBlank interrupt, go Supervisor
 
