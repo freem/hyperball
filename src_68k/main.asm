@@ -372,4 +372,4 @@ palette_ch1:
 Map1:
 	include "Map/map1.sng"
 
-	org $80000
+	;org $80000
