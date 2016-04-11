@@ -95,6 +95,28 @@ _RIGHT	= 7
 endVBlank	macro	
 
 
+	btst    #7,BIOS_SYSTEM_MODE
+    if_ne
+		jmp     SYSTEM_INT1
+    endi
+
+    movem.l d0-d7/a0-a6,-(a7)
+    move.b  d0,REG_DIPSW          ; Watchdog
+	
+    movem.l (a7)+,d0-d7/a0-a6
+    move.w  #4,LSPC_IRQ_ACK
+    
+    tst.b flag_VBlank	;don't do anything if main routine hasn't finished yet
+	
+	if_eq
+		clr.b flag_VBlank
+    endi
+    
+endm
+
+endVBlankold	macro	
+
+
 	; check if the BIOS wants to run its vblank
 	btst  #7,BIOS_SYSTEM_MODE
 	if_ne
@@ -106,7 +128,7 @@ endVBlank	macro
 
 	movem.l d0-d7/a0-a6,-(sp) ; save registers
 	move.w  #4,LSPC_IRQ_ACK   ; acknowledge the vblank interrupt
-	move.b  #0,REG_DIPSW      ; kick the watchdog
+	move.b  d0,REG_DIPSW      ; kick the watchdog
 
 
 	jsr     SYSTEM_IO         ; "Call SYSTEM_IO every 1/60 second."
@@ -127,7 +149,7 @@ endm
 
 Init_NeoGeo	macro	
 
-	move.b #0,REG_DIPSW    ; kick watchdog
+	move.b d0,REG_DIPSW    ; kick watchdog
 	lea    BIOS_WORKRAM,sp ; set stack pointer to BIOS_WORKRAM
 	move.w #0,LSPC_MODE    ; Disable auto-animation, timer interrupts, set auto-anim speed to 0 frames
 	move.w #7,LSPC_IRQ_ACK ; ack. all IRQs
@@ -185,7 +207,7 @@ Text_Draw macro ;
 	
 endm
 
-Load_Palette macro ;adresse rom,adresse palette,nbr palette
+Load_Palette macro ;adresse rom,n palette,nbr palette
 	lea     \1,a0       
     lea     PALETTES+(32*\2),a1
     
@@ -206,5 +228,53 @@ Clear_Ram macro ; structure
 	
 endm
 
+Animation macro ; structure
+
+	lea \1+_animl,a0
+	lea \1+_animi,a1
+	lea \1+_animactold,a2
+	lea \1+_animend,a3
+	
+	move.w \1+_animact,d4
+	move.w \1+_animactold,d5
+	
+	move.w \1+_animv,d0
+	move.w \1+_animn,d1
+	
+	move.w \1+_animl,d2
+	move.w \1+_animi,d3
+	
+	jsr Animation
+	
+endm
+	
+Position_Sprite_update	macro		
+	move.w	\2,d0
+	cmpi.w	#$140,d0
+	if_mi
+		move.w #$140,d0
+	endi
+	cmpi.w	#-$B8,d0
+	if_pl
+		move.w #$140,d0
+	endi
+	lsl.w	#7,d0
+	move.w	d0,\1+_x
 	
 	
+	move.w	\3,d0
+	cmpi.w	#$100,d0
+	if_mi
+		move.w #$100,d0
+	endi
+	cmpi.w	#-$100,d0
+	if_pl
+		move.w #$100,d0
+	endi
+	lsl.w	#7,d0
+	move.w	\1+_y,d1
+	andi.w	#$007F,d1
+	or.w	d0,d1
+	move.w	d1,\1+_y
+endm
+

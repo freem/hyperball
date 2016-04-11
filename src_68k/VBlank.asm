@@ -7,11 +7,16 @@ VBlank:
 	move.w #1,LSPC_INCR 	
 	
 	Sprite_position_ram BG1_struct
+	Sprite_position_ram CH1_struct
 
-
+	move.l #BufferMap,a1
+	Sprite_Draw					CH1_struct,(a1)
 	jsr Joypad
 	
 	endVBlank
+	
+	
+    
 	rte
 
 ;==============================================================================;
@@ -39,7 +44,7 @@ IRQ3:
 
 WaitVBlank:
 
-	move.b #1,flag_VBlank
+	st flag_VBlank
 
 	do
 		tst.b	flag_VBlank

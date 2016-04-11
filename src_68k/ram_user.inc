@@ -20,6 +20,10 @@ _else_			= RAMSTART+$02
 MEM_STDCTRL		= RAMSTART+$10
 BG1_struct 		= RAMSTART+$30
 BG2_struct 		= RAMSTART+$60
+CH1_struct 		= RAMSTART+$90
+CH2_struct 		= RAMSTART+$C0
+
+BufferMap 		= RAMSTART+$100
 		
 	else
 	
@@ -33,6 +37,8 @@ MEM_STDCTRL: ds.b $20 ; (32 byte) joypad 1&2 (1 down , 2 down stop, 3 up)
 
 BG1_struct : ds.b $30 ; struct for BG1
 BG2_struct : ds.b $30 ; struct for BG2
+CH1_struct : ds.b $40 ; struct for CH1
+BufferMap  : ds.b $80 ; Buffer for CH1
 
 	endif
 
@@ -48,25 +54,29 @@ _w 			= 	$0E ;2 bytes
 _h 			= 	$10 ;2 bytes
 
 ;for BG
-_scrolld0	=	$12	;2 bytes
-_scrolla0	=	$14	;4 bytes
-_scrolld1	=	$18	;2 bytes
-_scrolla1	=	$1A	;4 bytes
-_scrollaxe	=	$1E	;1 bytes
+_scrolld0	=	$20	;2 bytes
+_scrolla0	=	$22	;4 bytes
+_scrolld1	=	$24	;2 bytes
+_scrolla1	=	$26	;4 bytes
+_scrollaxe	=	$28	;1 bytes
 
 ;for Sprite
-_anim 		= 	$12	;2 bytes
-_animi 		= 	$12	;2 bytes
-_animl 		= 	$14 ;2 bytes
-_animact	=	$16	;2 bytes
-_animactold	=	$18	;2 bytes
-_animn		=	$1A	;2 bytes
-_animv		=	$1C	;2 bytes
-_animout	=	$1E	;2 bytes
-_animend	=	$20	;2 bytes
+_anim 		= 	$20	;2 bytes
+_animi 		= 	$20	;2 bytes
+_animl 		= 	$22 ;2 bytes
+_animact	=	$24	;2 bytes
+_animactold	=	$26	;2 bytes
+_animn		=	$28	;2 bytes
+_animv		=	$2A	;2 bytes
+_animout	=	$2C	;2 bytes
+_animend	=	$2E	;2 bytes
 
-_px			=	$22	;2 bytes
-_py			=	$24	;2 bytes
-_tileext	=	$26	;2 bytes
-_pitch		=	$28	;2 bytes
-_address	=	$2C	;4 bytes
+
+_direction	=	$30	;1 bytes
+
+_px			=	$12	;2 bytes
+_py			=	$14	;2 bytes
+_tileext	=	$16	;2 bytes
+_pitch		=	$18	;2 bytes
+_address	=	$1C	;4 bytes
+
