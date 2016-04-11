@@ -1,7 +1,7 @@
 # code name HYPER BALL
 yes.
 
-<img src="screenshot.png?raw=true" alt="HYPER BALL Screenshot" width="512" height="448">
+<img src="screenshot.png?raw=true" alt="HYPER BALL Screenshot" width="608" height="448">
 
 
 ## Notes
