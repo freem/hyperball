@@ -1,6 +1,9 @@
 # code name HYPER BALL
 yes.
 
+<img src="screenshot.png?raw=true" alt="HYPER BALL Screenshot" width="512" height="448">
+
+
 ## Notes
 - **Initial Platform**: Neo-Geo (Other platforms possible in the future)
 - **Number of Players**: 1-2 (ideally 1-4 for the 2v2 mode)
