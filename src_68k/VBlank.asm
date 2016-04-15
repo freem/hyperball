@@ -1,21 +1,19 @@
-
+; VBlank, IRQs, and other related routines.
 ;==============================================================================;
 ; VBlank
 ; VBlank interrupt, run things we want to do every frame.
 
 VBlank:
-	move.w #1,LSPC_INCR 	
-	
+	move.w #1,LSPC_INCR
+
 	Sprite_position_ram BG1_struct
 	Sprite_position_ram CH1_struct
 
 	move.l #BufferMap,a1
 	Sprite_Draw					CH1_struct,(a1)
 	jsr Joypad
-	
+
 	endVBlank
-	
-	
     
 	rte
 
