@@ -1,6 +1,6 @@
 Soft Dips
 =========
-Game Name (USA, Europe): "HANDBALL CHAMP. "
+Game Name (USA, Europe): "Handball Champ. "
 Game Name (Japan):       "HANDBALL CHAMP. " (todo: use Japanese characters)
 
 ------------+
