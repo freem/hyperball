@@ -1,0 +1,20 @@
+Soft Dips
+=========
+Game Name (USA, Europe): "HANDBALL CHAMP. "
+Game Name (Japan):       "HANDBALL CHAMP. " (todo: use Japanese characters)
+
+------------+
+Difficulty  | Level 1 - Level 8
+Round Time  | 30,45,60
+Match Points| 8-15 (8 choices total)
+VS Points   | 8-15 (8 choices total)
+Continue    | Yes/No
+Show Level  | Yes/No
+Show Credits| Yes/No
+Demo Sound  | Yes/No
+------------+
+
+Europe only:
+------------+
+Language    | English,French,Spanish,German,Italian
+------------+
